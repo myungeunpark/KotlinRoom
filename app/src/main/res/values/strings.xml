@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">KotlinKeyManagerWithRoom</string>
+    <string name="main_activity">Account Manager</string>
+    <string name="input_activity">Account Information</string>
+</resources>
