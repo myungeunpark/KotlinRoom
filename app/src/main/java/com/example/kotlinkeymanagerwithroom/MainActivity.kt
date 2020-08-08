@@ -76,10 +76,11 @@ class MainActivity : AppCompatActivity(), AccountListAdapter.Interaction {
             if(resultCode == Activity.RESULT_OK){
 
                 val account : AccountEntity = data?.getParcelableExtra("account")!!
-                if(data?.getStringExtra(Constant.NAME_TYPE) == Constant.VALUE_TYPE_INSERT)
-                    viewModel.insert(account)
-                else
-                    viewModel.update(account)
+                when {
+                    data?.getStringExtra(Constant.NAME_TYPE) == Constant.VALUE_TYPE_INSERT -> viewModel.insert(account)
+                    data?.getStringExtra(Constant.NAME_TYPE) == Constant.VALUE_TYPE_UPDATE -> viewModel.update(account)
+                    data?.getStringExtra(Constant.NAME_TYPE) == Constant.VALUE_TYPE_DELETE -> viewModel.delete(account)
+                }
             }
         }
     }

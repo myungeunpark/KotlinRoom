@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Visibility
+import android.view.View
 import com.example.kotlinkeymanagerwithroom.database.AccountEntity
 import kotlinx.android.synthetic.main.activity_input.*
 
@@ -26,9 +28,12 @@ class InputActivity : AppCompatActivity() {
 
             saveButton.text = "Update"
 
+            deleteButton.visibility = View.VISIBLE;
+
         }else{
 
             saveButton.text = "Save"
+            deleteButton.visibility = View.GONE;
         }
 
         saveButton.setOnClickListener {
@@ -57,6 +62,21 @@ class InputActivity : AppCompatActivity() {
             }
 
             intent.putExtra(Constant.NAME_TYPE, type)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+
+        }
+
+        deleteButton.setOnClickListener {
+
+            val intent = Intent()
+            account.name = editName.text.toString()
+            account.userId = editUserId.text.toString()
+            account.pwd = editPassword.text.toString()
+            account.link = editLink.text.toString()
+            intent.putExtra(Constant.NAME_ACCOUNT, account)
+
+            intent.putExtra(Constant.NAME_TYPE, Constant.VALUE_TYPE_DELETE)
             setResult(Activity.RESULT_OK, intent)
             finish()
 
